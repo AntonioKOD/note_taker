@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 const { v4: uuidv4, v4 } = require("uuid");
 
+
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -23,7 +25,7 @@ app.post("/api/notes", (req, res) => {
       const newNote = {
         title,
         text,
-        note_id: uuidv4(),
+        id: uuidv4(),
       };
 
       const parsedNotes = JSON.parse(data);
@@ -53,7 +55,7 @@ app.get("/api/notes/:id", (req, res) => {
     }
     const singleNote = JSON.parse(data);
 
-    const notes = singleNote.filter((note) => note.note_id === noteID);
+    const notes = singleNote.filter((note) => note.id === noteID);
     return notes.length > 0
       ? res.json(notes)
       : res.json("No note with that ID");
